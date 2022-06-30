@@ -1,0 +1,22 @@
+{
+  "name": "employee-management-system",
+  "version": "1.0.0",
+  "description": "Employee management system to track your employees.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ahmeds226/Employee-Management-System.git"
+  },
+  "author": "Ahmed Shahnawaz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ahmeds226/Employee-Management-System/issues"
+  },
+  "homepage": "https://github.com/Ahmeds226/Employee-Management-System#readme",
+  "dependencies": {
+    "inquirer": "^9.0.0"
+  }
+}
