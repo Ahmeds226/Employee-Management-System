@@ -12,31 +12,31 @@ function letsStart() {
       message: "What would you like to do?",
       choices: [
         {
-          name: "View All Departments",
+          name: "View all Departments",
           value: "viewAllDepartments",
         },
         {
-          name: "View All Roles",
+          name: "View all Roles",
           value: "viewAllRoles",
         },
         {
-          name: "View All Employees",
+          name: "View all Employees",
           value: "viewAllEmployees",
         },
         {
-          name: "Add A Department",
+          name: "Add a new Department",
           value: "addDepartment",
         },
         {
-          name: "Add A Role",
+          name: "Add a new Role",
           value: "addRole",
         },
         {
-          name: "Add An Employee",
+          name: "Add a new Employee",
           value: "addEmployee",
         },
         {
-          name: "Update An Employee Role",
+          name: "Update an existing Employee Role",
           value: "updateEmployeeRole",
         },
       ],
@@ -70,3 +70,70 @@ function letsStart() {
 }
 
 letsStart();
+
+//Functions for the main menu above.
+
+// View all departments.
+function viewAllDepartments() {
+  db.query("SELECT * FROM department", (err, res) => {
+    if (err) throw err;
+    console.table(res);
+  });
+  letsStart();
+}
+
+// View all roles.
+function viewAllRoles() {
+  db.query("SELECT * FROM role", (err, res) => {
+    console.table(res);
+  });
+  letsStart();
+}
+
+// View all employees.
+function viewAllEmployees() {
+  db.query("SELECT * FROM employee", (err, res) => {
+    console.table(res);
+  });
+  letsStart();
+}
+
+// Add a new department.
+function addDepartment() {
+  prompt([
+    {
+      type: "input",
+      name: "choice",
+      message: "Please add a appropiate name for the new department.",
+    },
+  ]).then((res) => {
+    let answer = res.choice;
+    db.query(
+      "INSERT INTO department (name) VALUES (?)",
+      [answer],
+      (err, res) => {
+        if (err) throw err;
+        console.table(res);
+      }
+    );
+    letsStart();
+  });
+}
+
+// Add a new role.
+function addNewRole() {
+  let departmentID = [];
+  let departmentName = [];
+  db.query("SELECT * FROM department", (err, res) => {
+    if (err) throw err;
+
+    res.forEach(({ id }) => {
+      departmentID.push(id);
+    });
+
+    res.forEach(({ name }) => {
+      departmentName.push(name);
+    });
+    addRole(departmentID, departmentName);
+  });
+}
