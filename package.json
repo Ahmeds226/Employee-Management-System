@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/Ahmeds226/Employee-Management-System#readme",
   "dependencies": {
-    "inquirer": "^9.0.0"
+    "console.table": "^0.10.0",
+    "inquirer": "^9.0.0",
+    "mysql": "^2.18.1"
   }
 }
