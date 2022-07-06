@@ -137,3 +137,41 @@ function addNewRole() {
     addRole(departmentID, departmentName);
   });
 }
+
+// Add a new role.
+function addRole(departmentID, departmentName) {
+  let id = "";
+  prompt([
+    {
+      type: "input",
+      name: "roleName",
+      message: "Please enter the role you would like to add.",
+    },
+    {
+      type: "input",
+      name: "salary",
+      message: "Please enter the salary for this postion.",
+    },
+    {
+      type: "list",
+      name: "departmentName",
+      message: "Please select the sutiable department this role belongs to",
+      choices: departmentName,
+    },
+  ]).then((answers) => {
+    for (let i = 0; i < departmentID.length; i++) {
+      if (answers.departmentName === departmentName[i]) {
+        id += departmentID[i];
+        console.log(id);
+      }
+    }
+    db.query(
+      "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)",
+      [answers.roleName, answers.salary, parseInt(id)],
+      (err, res) => {
+        if (err) throw err;
+        console.log("Role has been added");
+      }
+    );
+  });
+}
